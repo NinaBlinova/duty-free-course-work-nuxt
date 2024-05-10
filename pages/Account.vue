@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import {reactive} from "vue";
+import {reactive, watch, onMounted} from "vue";
 import ClassesCategory from "../components/classesCategory.vue";
 import {toGetMyData} from "~/state/state";
 import {Comfort} from "../Model/Comfort";
@@ -58,7 +58,7 @@ const cashData = reactive({
   price: 0,
   bonus: 0,
   discount: 0
-});
+})
 
 const updateFlightDetails = () => {
   if (toGetMyData.items[0].typeAirplane === 'business' && cashData.pin === toGetMyData.items[0].pinCode) {
@@ -69,12 +69,16 @@ const updateFlightDetails = () => {
     const comfortClass = new Comfort(cashData.wallet, cashData.card, toGetMyData.items[0].price);
     cashData.bonus = comfortClass.getBonus(toGetMyData.items[0].typeAirplane);
     cashData.discount = comfortClass.getDiscount(toGetMyData.items[0].typeAirplane);
-  } else {
+  } else if(toGetMyData.items[0].typeAirplane === 'econom' && cashData.pin === toGetMyData.items[0].pinCode) {
     const economClass = new Econom(cashData.wallet, cashData.card, toGetMyData.items[0].price);
     cashData.bonus = economClass.getBonus(toGetMyData.items[0].typeAirplane);
     cashData.discount = economClass.getDiscount(toGetMyData.items[0].typeAirplane);
   }
-};
+  else {
+    cashData.bonus = -1;
+    cashData.discount = -1;
+  }
+}
 
 const calculateBonus = () => {
   const selectedClass = toGetMyData.items[0].typeAirplane;
@@ -82,12 +86,12 @@ const calculateBonus = () => {
   if (bonusProgram) {
     cashData.bonus = bonusProgram.getBonus(toGetMyData.items[0].typeAirplane);
   }
-};
+}
 
 onMounted(() => {
   updateFlightDetails();
   watch(() => cashData.pin === toGetMyData.items[0].pinCode, calculateBonus);
-});
+})
 </script>
 
 <style scoped>

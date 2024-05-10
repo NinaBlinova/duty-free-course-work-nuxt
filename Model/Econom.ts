@@ -4,7 +4,7 @@
 
 import {IBonusProgramm} from "IBonusProgramm";
 
-class Comfort implements IBonusProgramm {
+class Econom implements IBonusProgramm {
     name: string;
     cash: number;
     card: number;
@@ -31,4 +31,4 @@ class Comfort implements IBonusProgramm {
 }
 
 
-export {Comfort};
+export {Econom};
