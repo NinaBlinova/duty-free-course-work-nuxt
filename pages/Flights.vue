@@ -63,7 +63,7 @@ export default {
         direction: "Moskow",
         customerName: "Nina",
         price: 0,
-        pinCode: "",
+        pinCode: "bt8192a",
         departureTime: "2024-05-18",
       })
     };

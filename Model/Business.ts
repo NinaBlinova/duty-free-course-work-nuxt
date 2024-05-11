@@ -18,7 +18,7 @@ class Business implements IBonusProgramm {
     }
 
     getDiscount(name: string): number {
-        if (this.card >= 88000) {
+        if (this.card > 88000) {
             //`Discount 30%`;
             return 0.3;
         } else if (this.card < 88000 && this.card > 66000) {
@@ -30,7 +30,7 @@ class Business implements IBonusProgramm {
     }
 
     getBonus(name: string): number {
-        if (this.cash >= 70000) {
+        if (this.cash > 70000) {
             return this.costTiscet / 2;
         } else {
             return this.costTiscet/4;

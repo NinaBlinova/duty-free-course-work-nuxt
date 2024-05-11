@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import {reactive, watch, onMounted} from "vue";
+import {reactive} from "vue";
 import ClassesCategory from "../components/classesCategory.vue";
 import {toGetMyData} from "~/state/state";
 import {Comfort} from "../Model/Comfort";
@@ -52,46 +52,36 @@ const classesCategories = reactive([
 ]);
 
 const cashData = reactive({
-  wallet: 0,
-  card: 0,
-  pin: "",
-  price: 0,
-  bonus: 0,
-  discount: 0
-})
+  wallet: 100000,
+  card: 100000,
+  pin: toGetMyData.items[0].pinCode,
+  bonus: 1,
+  discount: 1
+});
 
-const updateFlightDetails = () => {
+const businessClass = new Business(cashData.wallet, cashData.card, toGetMyData.items[0].price);
+const comfortClass = new Comfort(cashData.wallet, cashData.card, toGetMyData.items[0].price);
+const economClass = new Econom(cashData.wallet, cashData.card, toGetMyData.items[0].price);
+
+const calculateBonus = () => {
   if (toGetMyData.items[0].typeAirplane === 'business' && cashData.pin === toGetMyData.items[0].pinCode) {
-    const businessClass = new Business(cashData.wallet, cashData.card, toGetMyData.items[0].price);
     cashData.bonus = businessClass.getBonus(toGetMyData.items[0].typeAirplane);
     cashData.discount = businessClass.getDiscount(toGetMyData.items[0].typeAirplane);
   } else if (toGetMyData.items[0].typeAirplane === 'comfort' && cashData.pin === toGetMyData.items[0].pinCode) {
-    const comfortClass = new Comfort(cashData.wallet, cashData.card, toGetMyData.items[0].price);
     cashData.bonus = comfortClass.getBonus(toGetMyData.items[0].typeAirplane);
     cashData.discount = comfortClass.getDiscount(toGetMyData.items[0].typeAirplane);
-  } else if(toGetMyData.items[0].typeAirplane === 'econom' && cashData.pin === toGetMyData.items[0].pinCode) {
-    const economClass = new Econom(cashData.wallet, cashData.card, toGetMyData.items[0].price);
+  } else if (toGetMyData.items[0].typeAirplane === 'econom' && cashData.pin === toGetMyData.items[0].pinCode) {
     cashData.bonus = economClass.getBonus(toGetMyData.items[0].typeAirplane);
     cashData.discount = economClass.getDiscount(toGetMyData.items[0].typeAirplane);
+  } else {
+    this.bonus = -1;
+    this.discount = -1;
   }
-  else {
-    cashData.bonus = -1;
-    cashData.discount = -1;
-  }
-}
+};
 
-const calculateBonus = () => {
-  const selectedClass = toGetMyData.items[0].typeAirplane;
-  const bonusProgram = bonusPrograms[selectedClass];
-  if (bonusProgram) {
-    cashData.bonus = bonusProgram.getBonus(toGetMyData.items[0].typeAirplane);
-  }
-}
-
-onMounted(() => {
-  updateFlightDetails();
-  watch(() => cashData.pin === toGetMyData.items[0].pinCode, calculateBonus);
-})
+watch([() => cashData.wallet, () => cashData.card, () => cashData.pin], () => {
+  calculateBonus();
+});
 </script>
 
 <style scoped>
