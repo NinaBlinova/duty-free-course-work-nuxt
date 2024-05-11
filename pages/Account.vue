@@ -31,6 +31,7 @@
             <label for="discount">Discount: </label>
             <output name="discount" id="discount" class="text">{{ cashData.discount }}</output>
           </form>
+          <button @click="updateBalance">Update</button>
         </div>
       </fieldset>
     </div>
@@ -38,7 +39,7 @@
 </template>
 
 <script setup>
-import {reactive} from "vue";
+import {reactive, watch} from "vue";
 import ClassesCategory from "../components/classesCategory.vue";
 import {toGetMyData} from "~/state/state";
 import {Comfort} from "../Model/Comfort";
@@ -59,29 +60,34 @@ const cashData = reactive({
   discount: 1
 });
 
-const businessClass = new Business(cashData.wallet, cashData.card, toGetMyData.items[0].price);
-const comfortClass = new Comfort(cashData.wallet, cashData.card, toGetMyData.items[0].price);
-const economClass = new Econom(cashData.wallet, cashData.card, toGetMyData.items[0].price);
+
 
 const calculateBonus = () => {
   if (toGetMyData.items[0].typeAirplane === 'business' && cashData.pin === toGetMyData.items[0].pinCode) {
+    const businessClass = new Business(cashData.wallet, cashData.card, toGetMyData.items[0].price);
     cashData.bonus = businessClass.getBonus(toGetMyData.items[0].typeAirplane);
     cashData.discount = businessClass.getDiscount(toGetMyData.items[0].typeAirplane);
   } else if (toGetMyData.items[0].typeAirplane === 'comfort' && cashData.pin === toGetMyData.items[0].pinCode) {
+    const comfortClass = new Comfort(cashData.wallet, cashData.card, toGetMyData.items[0].price);
     cashData.bonus = comfortClass.getBonus(toGetMyData.items[0].typeAirplane);
     cashData.discount = comfortClass.getDiscount(toGetMyData.items[0].typeAirplane);
   } else if (toGetMyData.items[0].typeAirplane === 'econom' && cashData.pin === toGetMyData.items[0].pinCode) {
+    const economClass = new Econom(cashData.wallet, cashData.card, toGetMyData.items[0].price);
     cashData.bonus = economClass.getBonus(toGetMyData.items[0].typeAirplane);
     cashData.discount = economClass.getDiscount(toGetMyData.items[0].typeAirplane);
   } else {
     this.bonus = -1;
     this.discount = -1;
-  }
-};
+  }};
 
-watch([() => cashData.wallet, () => cashData.card, () => cashData.pin], () => {
+
+const updateBalance = () => {
   calculateBonus();
-});
+  watch([() => cashData.wallet, () => cashData.card, () => cashData.pin], () => {
+    calculateBonus();
+  });
+}
+
 </script>
 
 <style scoped>
