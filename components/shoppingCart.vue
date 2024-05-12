@@ -19,15 +19,26 @@ const calculateTotalPrice = () => {
 const increaseQuantity = () => {
   quantity.value++;
   calculateTotalPrice();
+  // Обновление элемента в списке toGetMySgopppingCart.items
+  const itemIndex = toGetMySgopppingCart.items.findIndex(item => item.imageName === props.imageName);
+  if (itemIndex !== -1) {
+    toGetMySgopppingCart.items[itemIndex].numberOfGoods = quantity.value;
+    toGetMySgopppingCart.items[itemIndex].price = totalPrice.value;
+  }
 };
 
 const decreaseQuantity = () => {
   if (quantity.value > 1) {
     quantity.value--;
     calculateTotalPrice();
+    // Обновление элемента в списке toGetMySgopppingCart.items
+    const itemIndex = toGetMySgopppingCart.items.findIndex(item => item.imageName === props.imageName);
+    if (itemIndex !== -1) {
+      toGetMySgopppingCart.items[itemIndex].numberOfGoods = quantity.value;
+      toGetMySgopppingCart.items[itemIndex].price = totalPrice.value;
+    }
   }
 };
-
 </script>
 
 <template>

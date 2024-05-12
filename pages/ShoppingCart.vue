@@ -7,6 +7,13 @@
           <label for="pay">You need to pay: </label>
           <output name="pay" id="pay" class="text">{{ totalSum }}</output>
         </form>
+        <form>
+          <label for="pay">You need to pay with discount: </label>
+          <output name="pay" id="pay" class="text">{{
+              (totalSum * (1 - toGetMyBalance.items[0].discount)).toFixed(1)
+            }}
+          </output>
+        </form>
         <div>
           <form>
             <label for="bonus">Bonus: </label>
@@ -53,11 +60,8 @@
             <label for="mix">Cash + bonus + card</label>
           </div>
         </div>
-
       </div>
-
     </fieldset>
-
     <div style="flex: 1;">
       <div class="cosmeticsGoods">
         <shoppingCart v-for="c in goods" :imageName="c.imageName" :caption="c.caption" :description="c.description"
@@ -67,16 +71,12 @@
       </div>
     </div>
   </div>
-
-
 </template>
-
 <script setup>
 import {toGetMySgopppingCart} from "~/state/shopping.ts";
 import {toGetMyBalance} from "~/state/myData.ts";
-import {reactive, computed, watch} from "vue";
+import {reactive, computed} from "vue";
 import ShoppingCart from "../components/shoppingCart.vue";
-
 
 const goods = reactive([])
 
@@ -97,6 +97,7 @@ const totalSum = computed(() => {
   }
   return sum;
 });
+
 </script>
 
 <style scoped>
