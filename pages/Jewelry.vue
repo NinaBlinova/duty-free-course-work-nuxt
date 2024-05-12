@@ -12,6 +12,8 @@
 import {reactive} from "vue";
 import Goods from "../components/goods.vue";
 
+///'imageName', 'caption', 'type', 'price', 'cod
+
 const goods = reactive([
   {
     imageName: "JewelryEarrings.jpg",
@@ -63,6 +65,7 @@ const goods = reactive([
     cod: 7
   }
 ])
+
 </script>
 
 <style scoped>

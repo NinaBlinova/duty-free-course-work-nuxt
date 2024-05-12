@@ -18,13 +18,10 @@
     <NuxtPage />
   </div>
 
-  <ol>
-    <li v-for="item in toGetMyData.items">{{ item }}</li>
-  </ol>
+
 </template>
 
 <script setup lang="ts">
-import {toGetMyData} from "~/state/state";
 </script>
 
 <style>

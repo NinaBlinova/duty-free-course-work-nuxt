@@ -1,6 +1,5 @@
 import {reactive} from 'vue'
 import {CompletionItemKind, SymbolKind} from "vscode-languageserver-types";
-import Flight from '@/pages/Flights.vue';
 
 interface IFlightsData {
     typeAirplane: string,
@@ -15,6 +14,7 @@ interface IBalance {
     wallet: number,
     card: number,
     bonus: number,
+    discount: number,
 }
 
 interface IData {
@@ -49,11 +49,13 @@ export const toGetMyBalance: IMyBalance = reactive({
     items: [] as IBalance[],
     add(wallet: number,
         card: number,
-        bonus: number,) {
+        bonus: number,
+        discount: number) {
         this.items.push({
             wallet: wallet,
             card: card,
             bonus: bonus,
+            discount: discount
         })
     }
 })

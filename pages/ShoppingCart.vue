@@ -32,7 +32,7 @@
           </form>
         </div>
 
-        <div >
+        <div>
           <div>
             <input type="radio" id="cash" name="pay" value="cash" @click="showPrompt('cash')"/>
             <label for="cash">Cash</label>
@@ -61,7 +61,7 @@
     <div style="flex: 1;">
       <div class="cosmeticsGoods">
         <shoppingCart v-for="c in goods" :imageName="c.imageName" :caption="c.caption" :description="c.description"
-                      :type="c.type"
+                      :type="c.type" :quantity="c.numberOfGoods"
                       :price="c.price">
         </shoppingCart>
       </div>
@@ -72,28 +72,22 @@
 </template>
 
 <script setup>
-//'caption', 'description', 'type', 'price'
-
+import {toGetMySgopppingCart} from "~/state/shopping.ts";
 import {reactive} from "vue";
 import ShoppingCart from "../components/shoppingCart.vue";
 
 
-const goods = reactive([
-  {
-    imageName: "JewelryEarrings.jpg",
-    caption: 'Gold Earrings',
-    type: 'Jewelry',
-    price: 45100
-  },
+const goods = reactive([])
 
-  {
-    imageName: "Dior1.jpg",
-    caption: 'Dior cosmetics set',
-    type: 'Cosmetics',
-    price: 33919.16
-  },
-
-])
+for (const item of toGetMySgopppingCart.items) {
+  goods.push({
+    imageName: item.imageName,
+    caption: item.caption,
+    type: item.type,
+    numberOfGoods: item.numberOfGoods,
+    price: item.price
+  });
+}
 </script>
 
 <style scoped>

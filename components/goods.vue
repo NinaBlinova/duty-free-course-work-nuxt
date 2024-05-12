@@ -1,5 +1,7 @@
 <script setup>
 import {computed} from "vue";
+import {toGetMySgopppingCart} from "~/state/shopping.ts";
+
 
 const props = defineProps(['imageName', 'caption', 'type', 'price', 'cod']);
 
@@ -14,7 +16,10 @@ const calculateTotalPrice = () => {
   totalPrice.value = quantity.value * props.price;
 };
 
-
+const addToCart = () => {
+  toGetMySgopppingCart.add(props.imageName, props.caption, props.type, quantity.value, totalPrice.value);
+  console.log(toGetMySgopppingCart);
+}
 
 </script>
 <template>
@@ -22,7 +27,7 @@ const calculateTotalPrice = () => {
     <figure class="category-border-goods">
       <img :src="imageUrl" class="imgCategoryGoods" alt="goods">
       <figcaption>
-        {{ caption }}, {{ price }}, "₽"
+        {{ caption }}, {{ price }}, {{ type }}, "₽"
       </figcaption>
       <input class="QuantityClass" type="number" v-model="quantity" min="1" placeholder="Quantity">
       <button @click="calculateTotalPrice" class="buy-button">Buy</button>

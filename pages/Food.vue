@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="cosmeticsGoods">
-      <goods v-for="c in goods" :imageName="c.imageName" :caption="c.caption"
+      <goods v-for="c in goods" :imageName="c.imageName" :caption="c.caption" :type="c.type"
              :price="c.price">
 
       </goods>
@@ -75,7 +75,7 @@ const goods = reactive([
 
 <style scoped>
 
-.cosmeticsGoods{
+.cosmeticsGoods {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;

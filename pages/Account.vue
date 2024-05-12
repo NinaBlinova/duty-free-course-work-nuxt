@@ -32,6 +32,7 @@
             <output name="discount" id="discount" class="text">{{ cashData.discount }}</output>
           </form>
           <button @click="updateBalance">Update</button>
+          <button @click="addMyBalaceData" style="margin-top: 10px">Add balance</button>
         </div>
       </fieldset>
     </div>
@@ -41,10 +42,12 @@
 <script setup>
 import {reactive, watch} from "vue";
 import ClassesCategory from "../components/classesCategory.vue";
-import {toGetMyData} from "~/state/state";
 import {Comfort} from "../Model/Comfort";
 import {Business} from "../Model/Business";
 import {Econom} from "../Model/Econom";
+import {toGetMyData} from "~/state/myData.ts";
+import {toGetMyBalance} from "~/state/myData.ts";
+
 
 const classesCategories = reactive([
   {imageName: "biznes_klass_v_samolete.jpg", discount: '30% discount on goods', bonus: '50% of the ticket price'},
@@ -59,7 +62,6 @@ const cashData = reactive({
   bonus: 1,
   discount: 1
 });
-
 
 
 const calculateBonus = () => {
@@ -78,7 +80,8 @@ const calculateBonus = () => {
   } else {
     this.bonus = -1;
     this.discount = -1;
-  }};
+  }
+};
 
 
 const updateBalance = () => {
@@ -87,6 +90,11 @@ const updateBalance = () => {
     calculateBonus();
   });
 }
+
+const addMyBalaceData = () => {
+  toGetMyBalance.add(cashData.wallet, cashData.card, cashData.bonus, cashData.discount);
+  console.log(toGetMyBalance);
+};
 
 </script>
 

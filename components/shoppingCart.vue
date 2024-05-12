@@ -1,13 +1,15 @@
 <script setup>
 import {computed, ref} from "vue";
+import {toGetMySgopppingCart} from "~/state/shopping.ts";
 
-const props = defineProps(['imageName', 'caption', 'type', 'price'])
+
+const props = defineProps(['imageName', 'caption', 'type', 'quantity', 'price'])
 
 const imageUrl = computed(() => {
   return new URL(`/assets/${props.imageName}`, import.meta.url).href;
 })
 
-const quantity = ref(1);
+const quantity = ref(props.quantity);
 const totalPrice = ref(props.price);
 
 const calculateTotalPrice = () => {

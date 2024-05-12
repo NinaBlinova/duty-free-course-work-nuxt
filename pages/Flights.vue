@@ -52,7 +52,7 @@
 <script>
 import {reactive} from "vue";
 import {FlightsData} from "@/Model/FlightsData.ts";
-import {toGetMyData} from "~/state/state.ts";
+import {toGetMyData} from "~/state/myData.ts";
 
 
 export default {
@@ -87,6 +87,7 @@ export default {
     }
   }
 };
+
 
 
 </script>
