@@ -2,4 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   pages: true,
+  buildModules: [
+    '@nuxt/typescript-build'
+  ],
 })
