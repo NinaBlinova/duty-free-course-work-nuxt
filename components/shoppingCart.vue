@@ -27,6 +27,7 @@ const decreaseQuantity = () => {
     calculateTotalPrice();
   }
 };
+
 </script>
 
 <template>
