@@ -5,8 +5,8 @@ class Parking {
     private days: number;
     private price: number;
 
-    constructor(typeCar: string, days: number) {
-        this.typeTiscet = typeCar;
+    constructor(typeAirpalne: string, days: number) {
+        this.typeTiscet = typeAirpalne;
         this.days = days;
         this.price = this.calculatePrice();
     }
