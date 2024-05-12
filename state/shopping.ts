@@ -12,7 +12,12 @@ interface IShoppingCart {
 
 
 interface IMyGooods {
-    item: IShoppingCart
+    items: IShoppingCart[]
+    add(imageName: string,
+        caption: string,
+        type: string,
+        numberOfGoods: number,
+        price: number): void
 }
 
 
