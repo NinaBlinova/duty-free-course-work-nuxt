@@ -11,7 +11,7 @@
             </div>
             <form>
               <label for="pay">You need to pay: </label>
-              <output name="pay" id="pay" class="text">{{parkingData.cost}}</output>
+              <output name="pay" id="pay" class="text">{{ parkingData.cost }}</output>
             </form>
             <div>
               <label for="pin">PIN: </label>
@@ -52,16 +52,15 @@ export default {
   methods: {
     updateParkingDetails() {
       const parking = new Parking(toGetMyData.items[0].typeAirplane, this.parkingData.startData);
-      if (this.parkingData.pin === toGetMyData.items[0].pinCode){
+      if (this.parkingData.pin === toGetMyData.items[0].pinCode) {
         this.parkingData.cost = parking.calculatePrice();
-      }
-      else {
+      } else {
         this.parkingData.cost = -1;
       }
 
     },
     addMyParkingData() {
-      toGetMySgopppingCart.add('parking2.jpg', 'Parking', 'cars', 1, this.parkingData.cost);
+      toGetMySgopppingCart.add('parking2.jpg', 'Parking', 'cars', 1, this.parkingData.cost, this.parkingData.cost);
       console.log(toGetMySgopppingCart);
     }
   }

@@ -17,7 +17,7 @@ const calculateTotalPrice = () => {
 };
 
 const addToCart = () => {
-  toGetMySgopppingCart.add(props.imageName, props.caption, props.type, quantity.value, totalPrice.value);
+  toGetMySgopppingCart.add(props.imageName, props.caption, props.type, quantity.value, totalPrice.value, props.price);
   console.log(toGetMySgopppingCart);
 }
 

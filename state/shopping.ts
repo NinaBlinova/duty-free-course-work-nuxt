@@ -6,7 +6,8 @@ interface IShoppingCart {
     caption: string,
     type: string,
     numberOfGoods: number,
-    price: number
+    price: number,
+    cost: number
 }
 
 
@@ -21,13 +22,15 @@ export const toGetMySgopppingCart: IMyGooods = reactive({
         caption: string,
         type: string,
         numberOfGoods: number,
-        price: number) {
+        price: number,
+        cost: number) {
         this.items.push({
             imageName: imageName,
             caption: caption,
             type: type,
             numberOfGoods: numberOfGoods,
-            price: price
+            price: price,
+            cost: cost
         })
     }
 })

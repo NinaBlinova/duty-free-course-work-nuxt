@@ -66,7 +66,7 @@
       <div class="cosmeticsGoods">
         <shoppingCart v-for="c in goods" :imageName="c.imageName" :caption="c.caption" :description="c.description"
                       :type="c.type" :quantity="c.numberOfGoods"
-                      :price="c.price">
+                      :price="c.price" :cost="c.cost">
         </shoppingCart>
       </div>
     </div>
@@ -83,9 +83,9 @@ const goods = reactive(toGetMySgopppingCart.items.map(item => ({
   caption: item.caption,
   type: item.type,
   numberOfGoods: item.numberOfGoods,
-  price: item.price
+  price: item.price,
+  cost: item.cost
 })));
-
 
 const totalSum = computed(() => {
   let sum = 0;

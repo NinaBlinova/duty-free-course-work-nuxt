@@ -3,7 +3,7 @@ import {computed, ref} from "vue";
 import {toGetMySgopppingCart} from "~/state/shopping.ts";
 
 
-const props = defineProps(['imageName', 'caption', 'type', 'quantity', 'price'])
+const props = defineProps(['imageName', 'caption', 'type', 'quantity', 'price', 'cost'])
 
 const imageUrl = computed(() => {
   return new URL(`/assets/${props.imageName}`, import.meta.url).href;
@@ -13,7 +13,7 @@ const quantity = ref(props.quantity);
 const totalPrice = ref(props.price);
 
 const calculateTotalPrice = () => {
-  totalPrice.value = quantity.value * props.price;
+  totalPrice.value = quantity.value * props.cost;
 };
 
 const increaseQuantity = () => {
@@ -59,6 +59,7 @@ const decreaseQuantity = () => {
       <div class="description">
         <span>{{ caption }}</span>
         <span>{{ type }}</span>
+        <span>{{ cost }}</span>
         <span>{{ price.toFixed(1) }}</span>
       </div>
 
