@@ -78,17 +78,14 @@ import {toGetMyBalance} from "~/state/myData.ts";
 import {reactive, computed} from "vue";
 import ShoppingCart from "../components/shoppingCart.vue";
 
-const goods = reactive([])
+const goods = reactive(toGetMySgopppingCart.items.map(item => ({
+  imageName: item.imageName,
+  caption: item.caption,
+  type: item.type,
+  numberOfGoods: item.numberOfGoods,
+  price: item.price
+})));
 
-for (const item of toGetMySgopppingCart.items) {
-  goods.push({
-    imageName: item.imageName,
-    caption: item.caption,
-    type: item.type,
-    numberOfGoods: item.numberOfGoods,
-    price: item.price
-  });
-}
 
 const totalSum = computed(() => {
   let sum = 0;

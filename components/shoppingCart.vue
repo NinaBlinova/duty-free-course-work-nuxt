@@ -59,7 +59,7 @@ const decreaseQuantity = () => {
       <div class="description">
         <span>{{ caption }}</span>
         <span>{{ type }}</span>
-        <span>{{ price }}</span>
+        <span>{{ price.toFixed(1) }}</span>
       </div>
 
       <div class="quantity">
@@ -71,7 +71,7 @@ const decreaseQuantity = () => {
           <p>-</p>
         </button>
       </div>
-      <div class="total-price">{{ totalPrice }}</div>
+      <div class="total-price">{{ totalPrice.toFixed(1) }}</div>
     </div>
   </div>
 </template>
