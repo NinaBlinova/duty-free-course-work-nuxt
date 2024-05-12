@@ -5,7 +5,7 @@
       <div class="wrapper">
         <form>
           <label for="pay">You need to pay: </label>
-          <output name="pay" id="pay" class="text">{{ totalSum }}</output>
+          <output name="pay" id="pay" class="text">{{ totalSum.toFixed(1) }}</output>
         </form>
         <form>
           <label for="pay">You need to pay with discount: </label>
