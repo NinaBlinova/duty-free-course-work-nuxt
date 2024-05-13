@@ -11,6 +11,7 @@ interface IShoppingCart {
 
 interface IMyGooods {
     items: IShoppingCart[]
+
     add(imageName: string,
         caption: string,
         type: string,
@@ -38,5 +39,10 @@ export const myGoods: IMyGooods = reactive({
         if (itemIndex !== -1) {
             this.items[itemIndex].numberOfGoods = quantity;
         }
+    },
+    deleteGood(imageName: string) {
+        const itemIndex = this.items.findIndex((item: IShoppingCart) => item.imageName === imageName);
+        this.items.splice(itemIndex, 1);
+
     }
 })

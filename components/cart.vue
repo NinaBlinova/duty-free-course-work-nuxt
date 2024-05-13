@@ -30,7 +30,12 @@ const decreaseQuantity = () => {
     calculateTotalPrice();
     myGoods.changeQuantity(quantity.value, props.imageName)  }
 };
+
+const deleteGood = () => {
+  myGoods.deleteGood(props.imageName);
+}
 </script>
+
 
 <template>
   <div class="shopping-cart">
@@ -61,6 +66,7 @@ const decreaseQuantity = () => {
         <button @click="decreaseQuantity" class="minus-btn" type="button" name="button">
           <p>-</p>
         </button>
+        <button @click="deleteGood" type="button" name="button" style="color: red; margin-left: 10px"><p>x</p></button>
       </div>
       <div class="total-price">{{ totalPrice.toFixed(1) }}</div>
     </div>
