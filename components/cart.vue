@@ -9,8 +9,10 @@ const imageUrl = computed(() => {
   return new URL(`/assets/${props.imageName}`, import.meta.url).href;
 })
 
-const quantity = ref(props.quantity);
-const totalPrice = ref(props.price * props.quantity);
+const quantity = ref(0);
+quantity.value = props.quantity;
+const totalPrice = ref(0);
+totalPrice.value = props.quantity * props.price;
 
 const calculateTotalPrice = () => {
   totalPrice.value = quantity.value * props.price;
@@ -19,15 +21,14 @@ const calculateTotalPrice = () => {
 const increaseQuantity = () => {
   quantity.value++;
   calculateTotalPrice();
-  myGoods.changeQuantity(quantity.value, totalPrice.value, item.imageName);
+  myGoods.changeQuantity(quantity.value, props.imageName)
 };
 
 const decreaseQuantity = () => {
-  if (quantity.value > 1) {
+  if (quantity.value > 0) {
     quantity.value--;
     calculateTotalPrice();
-    myGoods.changeQuantity(quantity.value, totalPrice.value, item.imageName);
-  }
+    myGoods.changeQuantity(quantity.value, props.imageName)  }
 };
 </script>
 
@@ -49,7 +50,6 @@ const decreaseQuantity = () => {
       <div class="description">
         <span>{{ caption }}</span>
         <span>{{ type }}</span>
-        <span>{{ price }}</span>
         <span>{{ price.toFixed(1) }}</span>
       </div>
 
@@ -57,7 +57,7 @@ const decreaseQuantity = () => {
         <button @click="increaseQuantity" class="plus-btn" type="button" name="button">
           <p>+</p>
         </button>
-        <input type="text" v-model="quantity" name="name">
+        <input type="text" v-model="quantity" name="name"/>
         <button @click="decreaseQuantity" class="minus-btn" type="button" name="button">
           <p>-</p>
         </button>

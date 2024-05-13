@@ -64,25 +64,26 @@
     </fieldset>
     <div style="flex: 1;">
       <div class="cosmeticsGoods">
-        <shoppingCart v-for="c in myGoods.items" :imageName="c.imageName" :caption="c.caption" :description="c.description"
+        <Cart v-for="c in myGoods.items" :imageName="c.imageName" :caption="c.caption"
                       :type="c.type" :quantity="c.numberOfGoods"
                       :price="c.price">
-        </shoppingCart>
+        </Cart>
       </div>
     </div>
   </div>
 </template>
 <script setup>
+///'imageName', 'caption', 'type', 'quantity', 'price'
 import {myGoods} from "~/state/myCart.ts";
 import {myBalance} from "~/state/myData.ts";
 import {reactive, computed} from "vue";
-import ShoppingCart from "../components/cart.vue";
+import Cart from "../components/cart.vue";
 
 
 const totalSum = computed(() => {
   let sum = 0;
   for (const item of myGoods.items) {
-    sum += item.price;
+    sum += item.price * item.numberOfGoods;
   }
   return sum;
 });

@@ -33,11 +33,10 @@ export const myGoods: IMyGooods = reactive({
             price: price
         })
     },
-    changeQuantity(quantity: number, price: number, imageName: string) {
+    changeQuantity(quantity: number, imageName: string) {
         const itemIndex = this.items.findIndex((item: IShoppingCart) => item.imageName === imageName);
         if (itemIndex !== -1) {
             this.items[itemIndex].numberOfGoods = quantity;
-            this.items[itemIndex].price = price;
         }
     }
 })

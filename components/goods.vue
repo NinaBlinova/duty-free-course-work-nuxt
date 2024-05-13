@@ -12,7 +12,7 @@ const imageUrl = computed(() => {
 const quantity = ref(0);
 const totalPrice = ref(0);
 
-const calculateTotalPrice = () => {
+const calculatePrice = () => {
   totalPrice.value = quantity.value * props.price;
 };
 
@@ -28,8 +28,8 @@ const addToCart = () => {
       <figcaption>
         {{ caption }}, {{ price }}, {{ type }}, "₽"
       </figcaption>
-      <input class="QuantityClass" type="number" v-model="quantity" min="1" placeholder="Quantity">
-      <button @click="calculateTotalPrice" class="buy-button">Buy</button>
+      <input class="QuantityClass" type="number" v-model="quantity" min="1" placeholder="Quantity"/>
+      <button @click="calculatePrice" class="buy-button">Buy</button>
       <output>{{ totalPrice.toFixed(1) }}</output>
       <button @click="addToCart" class="buy-button">Add to shopping cart</button>
     </figure>
