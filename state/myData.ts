@@ -25,7 +25,7 @@ interface IMyBalance {
     item: IBalance
 }
 
-export const toGetMyData: IData = reactive({
+export const data: IData = reactive({
     items: [] as IFlightsData[],
 
     add(typeAirplane: string,
@@ -45,7 +45,7 @@ export const toGetMyData: IData = reactive({
     }
 })
 
-export const toGetMyBalance: IMyBalance = reactive({
+export const myBalance: IMyBalance = reactive({
     items: [] as IBalance[],
     add(wallet: number,
         card: number,

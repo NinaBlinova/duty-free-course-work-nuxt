@@ -52,7 +52,7 @@
 <script>
 import {reactive} from "vue";
 import {FlightsData} from "@/Model/FlightsData.ts";
-import {toGetMyData} from "~/state/myData.ts";
+import {data} from "~/state/myData.ts";
 
 
 export default {
@@ -81,9 +81,9 @@ export default {
       this.flightData.price = flights.generatePrice(this.flightData.typeAirplane);
     },
     addMyFlightData() {
-      toGetMyData.add(this.flightData.typeAirplane, this.flightData.direction, this.flightData.customerName, this.flightData.price,
+      data.add(this.flightData.typeAirplane, this.flightData.direction, this.flightData.customerName, this.flightData.price,
           this.flightData.pinCode, this.flightData.departureTime);
-      console.log(toGetMyData);
+      console.log(data);
     }
   }
 };

@@ -1,42 +1,32 @@
 <script setup>
 import {computed, ref} from "vue";
-import {toGetMySgopppingCart} from "~/state/shopping.ts";
+import {myGoods} from "~/state/myCart.ts";
 
 
-const props = defineProps(['imageName', 'caption', 'type', 'quantity', 'price', 'cost'])
+const props = defineProps(['imageName', 'caption', 'type', 'quantity', 'price'])
 
 const imageUrl = computed(() => {
   return new URL(`/assets/${props.imageName}`, import.meta.url).href;
 })
 
 const quantity = ref(props.quantity);
-const totalPrice = ref(props.price);
+const totalPrice = ref(props.price * props.quantity);
 
 const calculateTotalPrice = () => {
-  totalPrice.value = quantity.value * props.cost;
+  totalPrice.value = quantity.value * props.price;
 };
 
 const increaseQuantity = () => {
   quantity.value++;
   calculateTotalPrice();
-  // Обновление элемента в списке toGetMySgopppingCart.items
-  const itemIndex = toGetMySgopppingCart.items.findIndex(item => item.imageName === props.imageName);
-  if (itemIndex !== -1) {
-    toGetMySgopppingCart.items[itemIndex].numberOfGoods = quantity.value;
-    toGetMySgopppingCart.items[itemIndex].price = totalPrice.value;
-  }
+  myGoods.changeQuantity(quantity.value, totalPrice.value, item.imageName);
 };
 
 const decreaseQuantity = () => {
   if (quantity.value > 1) {
     quantity.value--;
     calculateTotalPrice();
-    // Обновление элемента в списке toGetMySgopppingCart.items
-    const itemIndex = toGetMySgopppingCart.items.findIndex(item => item.imageName === props.imageName);
-    if (itemIndex !== -1) {
-      toGetMySgopppingCart.items[itemIndex].numberOfGoods = quantity.value;
-      toGetMySgopppingCart.items[itemIndex].price = totalPrice.value;
-    }
+    myGoods.changeQuantity(quantity.value, totalPrice.value, item.imageName);
   }
 };
 </script>
@@ -59,7 +49,7 @@ const decreaseQuantity = () => {
       <div class="description">
         <span>{{ caption }}</span>
         <span>{{ type }}</span>
-        <span>{{ cost }}</span>
+        <span>{{ price }}</span>
         <span>{{ price.toFixed(1) }}</span>
       </div>
 
@@ -117,7 +107,7 @@ const decreaseQuantity = () => {
 
 .image {
   margin-right: 50px;
-  width: 55px;
+  width: 75px;
 
 }
 

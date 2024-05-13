@@ -1,6 +1,6 @@
 <script setup>
 import {computed} from "vue";
-import {toGetMySgopppingCart} from "~/state/shopping.ts";
+import {myGoods} from "~/state/myCart.ts";
 
 
 const props = defineProps(['imageName', 'caption', 'type', 'price', 'cod']);
@@ -17,10 +17,9 @@ const calculateTotalPrice = () => {
 };
 
 const addToCart = () => {
-  toGetMySgopppingCart.add(props.imageName, props.caption, props.type, quantity.value, totalPrice.value, props.price);
-  console.log(toGetMySgopppingCart);
+  myGoods.add(props.imageName, props.caption, props.type, quantity.value, props.price);
+  console.log(myGoods);
 }
-
 </script>
 <template>
   <div class="categoryGoods">

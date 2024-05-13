@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import {toGetMySgopppingCart} from "~/state/shopping.ts";
+import {myGoods} from "~/state/myCart.ts";
 import {reactive, watch, computed} from "vue";
-import {toGetMyData} from "~/state/myData.ts";
+import {data} from "~/state/myData.ts";
 import {Parking} from "@/Model/Parking.ts";
 
 export default {
@@ -39,7 +39,7 @@ export default {
       parkingData: reactive({
         startData: 0,
         cost: 0,
-        pin: toGetMyData.items[0].pinCode,
+        pin: data.items[0].pinCode,
       })
     };
   },
@@ -51,8 +51,8 @@ export default {
   },
   methods: {
     updateParkingDetails() {
-      const parking = new Parking(toGetMyData.items[0].typeAirplane, this.parkingData.startData);
-      if (this.parkingData.pin === toGetMyData.items[0].pinCode) {
+      const parking = new Parking(data.items[0].typeAirplane, this.parkingData.startData);
+      if (this.parkingData.pin === data.items[0].pinCode) {
         this.parkingData.cost = parking.calculatePrice();
       } else {
         this.parkingData.cost = -1;
@@ -60,8 +60,8 @@ export default {
 
     },
     addMyParkingData() {
-      toGetMySgopppingCart.add('parking2.jpg', 'Parking', 'cars', 1, this.parkingData.cost, this.parkingData.cost);
-      console.log(toGetMySgopppingCart);
+      myGoods.add('parking2.jpg', 'Parking', 'cars', 1, this.parkingData.cost);
+      console.log(myGoods);
     }
   }
 };

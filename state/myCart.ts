@@ -1,5 +1,4 @@
-import {reactive} from 'vue'
-import {CompletionItemKind, SymbolKind} from "vscode-languageserver-types";
+import {reactive, computed, ref} from 'vue'
 
 interface IShoppingCart {
     imageName: string,
@@ -10,7 +9,6 @@ interface IShoppingCart {
     cost: number
 }
 
-
 interface IMyGooods {
     items: IShoppingCart[]
     add(imageName: string,
@@ -20,22 +18,26 @@ interface IMyGooods {
         price: number): void
 }
 
-
-export const toGetMySgopppingCart: IMyGooods = reactive({
+export const myGoods: IMyGooods = reactive({
     items: [] as IShoppingCart[],
     add(imageName: string,
         caption: string,
         type: string,
         numberOfGoods: number,
-        price: number,
-        cost: number) {
+        price: number) {
         this.items.push({
             imageName: imageName,
             caption: caption,
             type: type,
             numberOfGoods: numberOfGoods,
-            price: price,
-            cost: cost
+            price: price
         })
+    },
+    changeQuantity(quantity: number, price: number, imageName: string) {
+        const itemIndex = this.items.findIndex((item: IShoppingCart) => item.imageName === imageName);
+        if (itemIndex !== -1) {
+            this.items[itemIndex].numberOfGoods = quantity;
+            this.items[itemIndex].price = price;
+        }
     }
 })

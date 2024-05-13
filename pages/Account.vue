@@ -45,8 +45,8 @@ import ClassesCategory from "../components/classesCategory.vue";
 import {Comfort} from "../Model/Comfort";
 import {Business} from "../Model/Business";
 import {Econom} from "../Model/Econom";
-import {toGetMyData} from "~/state/myData.ts";
-import {toGetMyBalance} from "~/state/myData.ts";
+import {data} from "~/state/myData.ts";
+import {myBalance} from "~/state/myData.ts";
 
 
 const classesCategories = reactive([
@@ -58,25 +58,25 @@ const classesCategories = reactive([
 const cashData = reactive({
   wallet: 100000,
   card: 100000,
-  pin: toGetMyData.items[0].pinCode,
+  pin: data.items[0].pinCode,
   bonus: 1,
   discount: 1
 });
 
 
 const calculateBonus = () => {
-  if (toGetMyData.items[0].typeAirplane === 'business' && cashData.pin === toGetMyData.items[0].pinCode) {
-    const businessClass = new Business(cashData.wallet, cashData.card, toGetMyData.items[0].price);
-    cashData.bonus = businessClass.getBonus(toGetMyData.items[0].typeAirplane);
-    cashData.discount = businessClass.getDiscount(toGetMyData.items[0].typeAirplane);
-  } else if (toGetMyData.items[0].typeAirplane === 'comfort' && cashData.pin === toGetMyData.items[0].pinCode) {
-    const comfortClass = new Comfort(cashData.wallet, cashData.card, toGetMyData.items[0].price);
-    cashData.bonus = comfortClass.getBonus(toGetMyData.items[0].typeAirplane);
-    cashData.discount = comfortClass.getDiscount(toGetMyData.items[0].typeAirplane);
-  } else if (toGetMyData.items[0].typeAirplane === 'econom' && cashData.pin === toGetMyData.items[0].pinCode) {
-    const economClass = new Econom(cashData.wallet, cashData.card, toGetMyData.items[0].price);
-    cashData.bonus = economClass.getBonus(toGetMyData.items[0].typeAirplane);
-    cashData.discount = economClass.getDiscount(toGetMyData.items[0].typeAirplane);
+  if (data.items[0].typeAirplane === 'business' && cashData.pin === data.items[0].pinCode) {
+    const businessClass = new Business(cashData.wallet, cashData.card, data.items[0].price);
+    cashData.bonus = businessClass.getBonus(data.items[0].typeAirplane);
+    cashData.discount = businessClass.getDiscount(data.items[0].typeAirplane);
+  } else if (data.items[0].typeAirplane === 'comfort' && cashData.pin === data.items[0].pinCode) {
+    const comfortClass = new Comfort(cashData.wallet, cashData.card, data.items[0].price);
+    cashData.bonus = comfortClass.getBonus(data.items[0].typeAirplane);
+    cashData.discount = comfortClass.getDiscount(data.items[0].typeAirplane);
+  } else if (data.items[0].typeAirplane === 'econom' && cashData.pin === data.items[0].pinCode) {
+    const economClass = new Econom(cashData.wallet, cashData.card, data.items[0].price);
+    cashData.bonus = economClass.getBonus(data.items[0].typeAirplane);
+    cashData.discount = economClass.getDiscount(data.items[0].typeAirplane);
   } else {
     this.bonus = -1;
     this.discount = -1;
@@ -92,8 +92,8 @@ const updateBalance = () => {
 }
 
 const addMyBalaceData = () => {
-  toGetMyBalance.add(cashData.wallet, cashData.card, cashData.bonus, cashData.discount);
-  console.log(toGetMyBalance);
+  myBalance.add(cashData.wallet, cashData.card, cashData.bonus, cashData.discount);
+  console.log(myBalance);
 };
 
 </script>
