@@ -57,5 +57,10 @@ export const myBalance: IMyBalance = reactive({
             bonus: bonus,
             discount: discount
         })
+    },
+    update(wallet: number, card: number, bonus: number) {
+        this.items[0].wallet = wallet;
+        this.items[0].card = card;
+        this.items[0].bonus = bonus;
     }
 })
