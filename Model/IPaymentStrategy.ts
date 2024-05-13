@@ -2,6 +2,6 @@
 
 interface IPaymentStrategy {
     name : string;
-    pay(amount: number): [string, number, number];
+    pay(amount: number): [string, number, number, number, number];
 }
 export type {IPaymentStrategy};

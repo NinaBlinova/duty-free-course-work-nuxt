@@ -41,22 +41,22 @@
 
         <div>
           <div>
-            <input type="radio" id="cash" name="pay" value="cash" @click="showPrompt('cash')"/>
+            <input type="radio" id="cash" name="pay" value="cash"/>
             <label for="cash">Cash</label>
           </div>
 
           <div>
-            <input type="radio" id="card" name="pay" value="card" @click="showPrompt('card')"/>
+            <input type="radio" id="card" name="pay" value="card"/>
             <label for="card">Card</label>
           </div>
 
           <div>
-            <input type="radio" id="bonus" name="pay" value="bonus" @click="showPrompt('bonus')"/>
+            <input type="radio" id="bonus" name="pay" value="bonus"/>
             <label for="bonus">Bonus</label>
           </div>
 
           <div>
-            <input type="radio" id="mix" name="pay" value="mix" @click="showPrompt('mix')"/>
+            <input type="radio" id="mix" name="pay" value="mix"/>
             <label for="mix">Cash + bonus + card</label>
           </div>
         </div>
@@ -65,18 +65,17 @@
     <div style="flex: 1;">
       <div class="cosmeticsGoods">
         <Cart v-for="c in myGoods.items" :imageName="c.imageName" :caption="c.caption"
-                      :type="c.type" :quantity="c.numberOfGoods"
-                      :price="c.price">
+              :type="c.type" :quantity="c.numberOfGoods"
+              :price="c.price">
         </Cart>
       </div>
     </div>
   </div>
 </template>
 <script setup>
-///'imageName', 'caption', 'type', 'quantity', 'price'
 import {myGoods} from "~/state/myCart.ts";
 import {myBalance} from "~/state/myData.ts";
-import {reactive, computed} from "vue";
+import {computed} from "vue";
 import Cart from "../components/cart.vue";
 
 
@@ -87,6 +86,8 @@ const totalSum = computed(() => {
   }
   return sum;
 });
+
+
 
 </script>
 

@@ -5,3 +5,5 @@ describe("Math functions", () => {
         expect(add(1, 2)).toEqual(3);
     });
 });
+
+
