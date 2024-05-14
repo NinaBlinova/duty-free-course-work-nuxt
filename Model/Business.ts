@@ -2,7 +2,7 @@
 
 /* global console */
 
-import {IBonusProgramm} from "IBonusProgramm";
+import {IBonusProgramm} from "../Model/IBonusProgramm";
 
 class Business implements IBonusProgramm {
     name: string;
