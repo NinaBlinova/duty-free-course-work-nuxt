@@ -26,6 +26,9 @@ export const myGoods: IMyGooods = reactive({
         type: string,
         numberOfGoods: number,
         price: number) {
+        if (numberOfGoods < 1) {
+            numberOfGoods = 1; // Устанавливаем количество товара равным 1, если оно меньше 1
+        }
         this.items.push({
             imageName: imageName,
             caption: caption,

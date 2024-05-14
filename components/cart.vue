@@ -25,7 +25,7 @@ const increaseQuantity = () => {
 };
 
 const decreaseQuantity = () => {
-  if (quantity.value > 0) {
+  if (quantity.value > 1) {
     quantity.value--;
     calculateTotalPrice();
     myGoods.changeQuantity(quantity.value, props.imageName)  }
