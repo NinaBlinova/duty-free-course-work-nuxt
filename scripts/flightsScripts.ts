@@ -1,6 +1,6 @@
 import {reactive, watch} from "vue";
-import {FlightsData} from "@/Model/FlightsData.ts";
-import {data} from "~/state/myData.ts";
+import {FlightsData} from "@/Model/FlightsData";
+import {data} from "~/state/myData";
 
 export default {
     data() {

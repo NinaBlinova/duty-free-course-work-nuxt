@@ -1,4 +1,4 @@
-import {reactive, computed, ref} from 'vue'
+import {reactive} from 'vue'
 
 interface IShoppingCart {
     imageName: string,
