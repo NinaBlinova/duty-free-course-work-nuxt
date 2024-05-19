@@ -28,11 +28,12 @@ interface IData {
 }
 
 interface IMyBalance {
-    item: IBalance,
+    items: IBalance[],
     add(wallet: number,
         card: number,
         bonus: number,
-        discount: number): void
+        discount: number): void,
+    update(card: number, wallet: number, bonus: number) : void
 }
 
 export const data: IData = reactive({

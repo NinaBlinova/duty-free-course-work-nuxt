@@ -1,17 +1,10 @@
 import {reactive, watch} from "vue";
-import ClassesCategory from "../components/classesCategory.vue";
 import {Comfort} from "../Model/Comfort";
 import {Business} from "../Model/Business";
 import {Econom} from "../Model/Econom";
 import {data} from "~/state/myData";
 import {myBalance} from "~/state/myData";
 
-
-const classesCategories = reactive([
-    {imageName: "biznes_klass_v_samolete.jpg", discount: '30% discount on goods', bonus: '50% of the ticket price'},
-    {imageName: "comfort_klass_v_samolete.jpg", discount: '20% discount on goods', bonus: '30% of the ticket price'},
-    {imageName: "econom_klass_v_samolete.jpg", discount: '4% discount on goods', bonus: '10% of the ticket price'}
-]);
 
 const cashData = reactive({
     wallet: 100000,

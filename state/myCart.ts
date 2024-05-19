@@ -6,7 +6,6 @@ interface IShoppingCart {
     type: string,
     numberOfGoods: number,
     price: number,
-    cost: number
 }
 
 interface IMyGooods {
