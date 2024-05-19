@@ -20,10 +20,10 @@ describe("CardPaymentStrategy", () => {
         const result = strategy.pay();
         expect(result).toEqual([
             "You paid by card 50, but you no longer have the funds to make a purchase.",
-            0,
             50,
             0,
-            -1,
+            0,
+            -1
         ]);
     });
 });
