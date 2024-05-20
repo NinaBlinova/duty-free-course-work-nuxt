@@ -75,6 +75,7 @@ import {CashPaymentStrategy} from "../Model/CashPaymentStrategy.ts";
 import {CardPaymentStrategy} from "../Model/CardPaymentStrategy.ts";
 import {BonusPaymentStrategy} from "../Model/BonusPaymentStrategy.ts";
 import {MixedPaymentStrategy} from "../Model/MixedPaymentStrategy.ts";
+import {PaymentContext} from "../Model/Context.ts";
 
 
 const totalSum = computed(() => {
@@ -87,27 +88,27 @@ const totalSum = computed(() => {
 
 
 const handlePayment = (paymentMethod) => {
-  let paymentStrategy;
+  let paymentContext = new PaymentContext(null); // Создаем контекст
 
   switch (paymentMethod) {
     case 'card':
-      paymentStrategy = new CardPaymentStrategy(myBalance.items[0].card, myBalance.items[0].wallet, myBalance.items[0].bonus, totalSum.value);
+      paymentContext.setStrategy(new CardPaymentStrategy(myBalance.items[0].card, myBalance.items[0].wallet, myBalance.items[0].bonus, totalSum.value));
       break;
     case 'cash':
-      paymentStrategy = new CashPaymentStrategy(myBalance.items[0].card, myBalance.items[0].wallet, myBalance.items[0].bonus, totalSum.value);
+      paymentContext.setStrategy(new CashPaymentStrategy(myBalance.items[0].card, myBalance.items[0].wallet, myBalance.items[0].bonus, totalSum.value));
       break;
     case 'bonus':
-      paymentStrategy = new BonusPaymentStrategy(myBalance.items[0].card, myBalance.items[0].wallet, myBalance.items[0].bonus, totalSum.value);
+      paymentContext.setStrategy(new BonusPaymentStrategy(myBalance.items[0].card, myBalance.items[0].wallet, myBalance.items[0].bonus, totalSum.value));
       break;
     case 'mix':
-      paymentStrategy = new MixedPaymentStrategy(myBalance.items[0].card, myBalance.items[0].wallet, myBalance.items[0].bonus, totalSum.value);
+      paymentContext.setStrategy(new MixedPaymentStrategy(myBalance.items[0].card, myBalance.items[0].wallet, myBalance.items[0].bonus, totalSum.value));
       break;
     default:
       console.error('Invalid payment method');
       return;
   }
 
-  const [message, remainingCardBalance, remainingCashAmount, remainingBonusAmount, errorCode] = paymentStrategy.pay();
+  const [message, remainingCardBalance, remainingCashAmount, remainingBonusAmount, errorCode] = paymentContext.pay(totalSum.value); // Вызываем метод pay контекста
 
   if (errorCode === 0) {
     myBalance.update(remainingCardBalance, remainingCashAmount, remainingBonusAmount)
