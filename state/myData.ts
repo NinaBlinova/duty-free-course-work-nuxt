@@ -2,8 +2,6 @@ import {reactive} from 'vue';
 import {Comfort} from "../Model/Comfort";
 import {Business} from "../Model/Business";
 import {Econom} from "../Model/Econom";
-import {CompletionItemKind} from "vscode-languageserver-types";
-import Interface = CompletionItemKind.Interface;
 
 interface IFlightsData {
     typeAirplane: string,

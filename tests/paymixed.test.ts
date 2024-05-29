@@ -44,7 +44,7 @@ describe("MixedPaymentStrategy", () => {
         const strategy = new MixedPaymentStrategy(10, 20, 70, 100);
         const result = strategy.pay();
         expect(result).toEqual([
-            "Paid by card: 10 rub., by cash: 20 rub., by bonus: 70 rub. You have balance 0, 0, 0",
+            "Paid by card: 10 rub., by cash: 20 rub., by bonus: 70 rub. You have balance card: 0, cash: 0, bonus: 0",
             0,
             0,
             0,

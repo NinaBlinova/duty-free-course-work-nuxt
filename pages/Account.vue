@@ -41,9 +41,6 @@
 <script setup>
 import {reactive, watch} from "vue";
 import ClassesCategory from "../components/classesCategory.vue";
-import {Comfort} from "../Model/Comfort";
-import {Business} from "../Model/Business";
-import {Econom} from "../Model/Econom";
 import {data} from "~/state/myData.ts";
 import {myBalance} from "~/state/myData.ts";
 import {myBonus} from "~/state/myData.ts";
