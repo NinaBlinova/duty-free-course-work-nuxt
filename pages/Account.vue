@@ -4,7 +4,6 @@
       <classesCategory v-for="c in classesCategories" :imageName="c.imageName" :discount="c.discount"
                        :bonus="c.bonus"></classesCategory>
     </div>
-
     <div style="flex: 1;">
       <fieldset>
         <legend>Get Bonus</legend>
@@ -47,6 +46,7 @@ import {Business} from "../Model/Business";
 import {Econom} from "../Model/Econom";
 import {data} from "~/state/myData.ts";
 import {myBalance} from "~/state/myData.ts";
+import {myBonus} from "~/state/myData.ts";
 
 
 const classesCategories = reactive([
@@ -64,30 +64,23 @@ const cashData = reactive({
 });
 
 
-const calculateBonus = () => {
-  if (data.items[0].typeAirplane === 'business' && cashData.pin === data.items[0].pinCode) {
-    const businessClass = new Business(cashData.wallet, cashData.card, data.items[0].price);
-    cashData.bonus = businessClass.getBonus(data.items[0].typeAirplane);
-    cashData.discount = businessClass.getDiscount(data.items[0].typeAirplane);
-  } else if (data.items[0].typeAirplane === 'comfort' && cashData.pin === data.items[0].pinCode) {
-    const comfortClass = new Comfort(cashData.wallet, cashData.card, data.items[0].price);
-    cashData.bonus = comfortClass.getBonus(data.items[0].typeAirplane);
-    cashData.discount = comfortClass.getDiscount(data.items[0].typeAirplane);
-  } else if (data.items[0].typeAirplane === 'econom' && cashData.pin === data.items[0].pinCode) {
-    const economClass = new Econom(cashData.wallet, cashData.card, data.items[0].price);
-    cashData.bonus = economClass.getBonus(data.items[0].typeAirplane);
-    cashData.discount = economClass.getDiscount(data.items[0].typeAirplane);
-  } else {
-    this.bonus = -1;
-    this.discount = -1;
+const calculateBD = () => {
+  if (cashData.pin === data.items[0].pinCode) {
+    myBonus.add(data.items[0].typeAirplane, data.items[0].price, data.items[0].pinCode, cashData.wallet,
+    cashData.card, cashData.bonus, cashData.discount);
+    console.log(myBonus);
+    myBonus.updateBonus(data.items[0].typeAirplane, data.items[0].price, data.items[0].pinCode, cashData.wallet,
+        cashData.card, cashData.bonus, cashData.discount);
+    cashData.bonus = myBonus.items[0].bonus;
+    cashData.discount = myBonus.items[0].discount;
   }
-};
-
+}
 
 const updateBalance = () => {
-  calculateBonus();
+  calculateBD();
   watch([() => cashData.wallet, () => cashData.card, () => cashData.pin], () => {
-    calculateBonus();
+    calculateBD();
+
   });
 }
 
@@ -124,6 +117,5 @@ input {
   label, legend {
     font-size: 0.5rem;
   }
-
 }
 </style>

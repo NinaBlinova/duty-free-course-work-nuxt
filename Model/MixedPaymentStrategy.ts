@@ -62,7 +62,7 @@ class MixedPaymentStrategy implements IPaymentStrategy {
             const paymentCard = (this.amount * (this.card / (this.card + this.cash + this.bonus)));
             const paymentCash = (this.amount * (this.cash / (this.card + this.cash + this.bonus)));
             const paymentBonus = (this.amount * (this.bonus / (this.card + this.cash + this.bonus)));
-            return [`Paid by card: ${paymentCard} rub., by cash: ${paymentCash} rub., by bonus: ${paymentBonus} rub. You have balance ${this.card - paymentCard}, ${this.cash - paymentCash}, ${this.bonus - paymentBonus}`, this.card - paymentCard, this.cash - paymentCash, this.bonus - paymentBonus, 0];
+            return [`Paid by card: ${paymentCard} rub., by cash: ${paymentCash} rub., by bonus: ${paymentBonus} rub. You have balance card: ${this.card - paymentCard}, cash: ${this.cash - paymentCash}, bonus: ${this.bonus - paymentBonus}`, this.card - paymentCard, this.cash - paymentCash, this.bonus - paymentBonus, 0];
         }
         // Недостаточно средств
         else {
