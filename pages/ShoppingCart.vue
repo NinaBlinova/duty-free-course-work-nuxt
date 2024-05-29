@@ -9,20 +9,20 @@
         </form>
         <div>
           <form>
-            <label for="bonus">Bonus: </label>
-            <output name="bonus" id="bonus" class="text">{{ myBalance.items[0].bonus }}</output>
+            <label for="Bonus">Bonus: </label>
+            <output name="Bonus" id="Bonus" class="text">{{ myBalance.items[0].bonus }}</output>
           </form>
         </div>
         <div>
           <form>
-            <label for="wallet">Wallet: </label>
-            <output name="wallet" id="wallet" class="text">{{ myBalance.items[0].wallet }}</output>
+            <label for="Wallet">Wallet: </label>
+            <output name="Wallet" id="Wallet" class="text">{{ myBalance.items[0].wallet }}</output>
           </form>
         </div>
         <div>
           <form>
-            <label for="card">Card: </label>
-            <output name="card" id="card" class="text">{{ myBalance.items[0].card }}</output>
+            <label for="Card">Card: </label>
+            <output name="Card" id="Card" class="text">{{ myBalance.items[0].card }}</output>
           </form>
         </div>
         <div>
