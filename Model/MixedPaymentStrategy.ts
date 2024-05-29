@@ -33,8 +33,8 @@ class MixedPaymentStrategy implements IPaymentStrategy {
         else if (this.bonus >= this.amount && this.card + this.cash < this.amount) {
             return [`Paid by bonus: ${this.amount} rub. You have balance ${this.bonus - this.amount}`, 0, 0, this.bonus - this.amount, 0];
         }
-        //оплата частично наличкой и бонусами
-        else if (this.card + this.cash >= this.amount && this.bonus < this.amount) {
+        //оплата частично наличкой и картой
+        else if (this.card + this.cash >= this.amount) {
             const paymentBonus = this.amount - this.bonus;
             const paymentCard = (paymentBonus * (this.card / (this.card + this.cash)));
             const paymentCash = (paymentBonus * (this.cash / (this.card + this.cash)));
@@ -42,21 +42,21 @@ class MixedPaymentStrategy implements IPaymentStrategy {
 
         }
         // оплата частично наличкой и бонусами
-        else if (this.bonus + this.cash >= this.amount && this.card < this.amount) {
+        else if (this.bonus + this.cash >= this.amount) {
             const paymentCard = this.amount - this.card;
             const paymentCash = paymentCard * (this.cash / (this.bonus + this.cash));
             const paymentBonus = paymentCard * (this.bonus / (this.bonus + this.cash));
             return [`Paid by card: ${this.card} rub., by bonus: ${paymentBonus} rub., by cash: ${paymentCash} rub. You have balance cash: ${this.cash - paymentCash}, bonus: ${this.bonus - paymentBonus}`, 0, this.cash - paymentCash, this.bonus - paymentBonus, 0];
         }
 
-        // оплата частично картой и наличкой
-
-        else if (this.card + this.bonus >= this.amount && this.cash < this.amount) {
+        // оплата частично картой и бонусами
+        else if (this.card + this.bonus >= this.amount) {
             const paymentCash = this.amount - this.cash;
             const paymentCard = paymentCash * (this.card / (this.bonus + this.card));
             const paymentBonus = paymentCash * (this.bonus / (this.bonus + this.card));
             return [`Paid by card: ${paymentCard} rub., by bonus: ${paymentBonus} rub., by cash: ${this.cash} rub. You have balance bonus: ${this.bonus - paymentBonus}, the card: ${this.card - paymentCard}`, this.card - paymentCard, 0, this.bonus - paymentBonus, 0];
         }
+
         // Оплата всеми способами
         else if (this.card + this.cash + this.bonus >= this.amount) {
             const paymentCard = (this.amount * (this.card / (this.card + this.cash + this.bonus)));
