@@ -15,8 +15,8 @@
         </div>
         <div>
           <form>
-            <label for="wallet">Wallet: </label>
-            <output name="wallet" id="wallet" class="text">{{ myBalance.items[0].wallet }}</output>
+            <label for="Wallet">Wallet: </label>
+            <output name="Wallet" id="Wallet" class="text">{{ myBalance.items[0].wallet }}</output>
           </form>
         </div>
         <div>
