@@ -11,11 +11,11 @@
           <div>
             <div>
               <label for="wallet">Wallet: </label>
-              <input type="text" id="wallet" name="wallet" required minlength="1" size="10" v-model="cashData.wallet"/>
+              <input type="number" id="wallet" name="wallet" required minlength="1" size="10" v-model="cashData.wallet"/>
             </div>
             <div>
               <label for="card">Card: </label>
-              <input type="text" id="card" name="card" required minlength="1" size="10" v-model="cashData.card"/>
+              <input type="number" id="card" name="card" required minlength="1" size="10" v-model="cashData.card"/>
             </div>
             <div>
               <label for="pin">PIN: </label>
@@ -65,7 +65,6 @@ const calculateBD = () => {
   if (cashData.pin === data.items[0].pinCode) {
     myBonus.add(data.items[0].typeAirplane, data.items[0].price, data.items[0].pinCode, cashData.wallet,
     cashData.card, cashData.bonus, cashData.discount);
-    console.log(myBonus);
     myBonus.updateBonus(data.items[0].typeAirplane, data.items[0].price, data.items[0].pinCode, cashData.wallet,
         cashData.card, cashData.bonus, cashData.discount);
     cashData.bonus = myBonus.items[0].bonus;
@@ -106,7 +105,6 @@ input {
 .wrapper {
   gap: 1rem;
 }
-
 
 @media (max-width: 800px) {
 

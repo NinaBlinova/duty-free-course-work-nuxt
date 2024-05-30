@@ -5,7 +5,7 @@
       <div class="wrapper">
         <form>
           <label for="pay">You need to pay: </label>
-          <output name="pay" id="pay" class="text">{{ totalSum }}</output>
+          <output name="pay" id="pay" class="text">{{ totalSum.toFixed(1) }}</output>
         </form>
         <div>
           <form>
@@ -81,9 +81,9 @@ import {PaymentContext} from "../Model/Context.ts";
 const totalSum = computed(() => {
   let sum = 0;
   for (const item of myGoods.items) {
-    sum += item.price * item.numberOfGoods * (1 - myBalance.items[0].discount);
+    sum += item.price * item.numberOfGoods ;
   }
-  return sum;
+  return sum * (1 - myBalance.items[0].discount);
 });
 
 
